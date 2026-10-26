@@ -4,7 +4,7 @@
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-const cfg=()=>{try{return {url:'https://hvcpguioxhxubgbyenfn.supabase.co',...JSON.parse(localStorage.getItem('ascension_guild_config')||'{}')}}catch{return {url:'https://hvcpguioxhxubgbyenfn.supabase.co'}}};
+const cfg=()=>{try{return {url:'https://hvcpguioxhxubgbyenfn.supabase.co',key:'sb_publishable_icyV9-LASdH5dyDvwcTikQ_VwYfB128',...JSON.parse(localStorage.getItem('ascension_guild_config')||'{}')}}catch{return {url:'https://hvcpguioxhxubgbyenfn.supabase.co',key:'sb_publishable_icyV9-LASdH5dyDvwcTikQ_VwYfB128'}}};
 const saveCfg=v=>localStorage.setItem('ascension_guild_config',JSON.stringify(v));
 const getSession=()=>{try{return JSON.parse(localStorage.getItem('ascension_guild_session')||'null')}catch{return null}};
 const setSession=s=>localStorage.setItem('ascension_guild_session',JSON.stringify(s));
