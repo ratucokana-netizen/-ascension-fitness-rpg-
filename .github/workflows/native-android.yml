@@ -2,7 +2,8 @@ name: Native Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [feature/native-android-system]
+    branches:
+      - feature/native-android-system
     paths:
       - 'native-android/**'
       - '.github/workflows/native-android.yml'
@@ -19,12 +20,24 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: android-actions/setup-android@v3
+      - name: Install Android SDK 35
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+      - name: Verify build environment
+        run: |
+          java -version
+          gradle --version
+          ls -la
+          ls -la app/src/main/java/com/ascension/nativeapp
       - name: Build native debug APK
-        run: gradle --no-daemon assembleDebug
+        run: gradle --no-daemon --stacktrace --warning-mode all assembleDebug
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: ascension-native-debug-apk
           path: native-android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
