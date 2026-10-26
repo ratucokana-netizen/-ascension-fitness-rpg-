@@ -1,3 +1,1301 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d1b"><meta name="apple-mobile-web-app-capable" content="yes"><title>ASCENSION | Hunter Training</title><link rel="manifest" href="manifest.webmanifest"><style>
-:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#e9efff;background:#080d1b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 60% -10%,#20265b 0%,#080d1b 54%);min-height:100vh}button,input{font:inherit}button{cursor:pointer}header{padding:25px 20px 10px;max-width:650px;margin:auto}.eyebrow{font-size:11px;letter-spacing:3px;color:#9b9cfb;font-weight:800}.brand{font-size:31px;font-weight:950;letter-spacing:3px;margin:5px 0}.brand span{color:#a991ff}.subtitle{color:#94a0c5;font-size:13px}.container{max-width:650px;margin:auto;padding:12px 16px 105px}.panel{background:linear-gradient(135deg,#171d36,#11182d);border:1px solid #2b365b;border-radius:19px;padding:18px;margin-bottom:15px;box-shadow:0 10px 35px #0003}.hero{border-color:#6359ae;background:linear-gradient(135deg,#24235b,#141a35)}.flex{display:flex;justify-content:space-between;align-items:center;gap:12px}.rank{font-size:40px;font-weight:950;color:#c3b2ff;text-shadow:0 0 22px #8659ff80}.small{font-size:12px;color:#a1acd1}.stat{font-size:22px;font-weight:850}.meter{height:9px;background:#303752;border-radius:20px;overflow:hidden;margin:12px 0 6px}.meter>div{height:100%;background:linear-gradient(90deg,#6d5ef8,#cc8bff);transition:width .3s}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.tile{background:#10162a;border:1px solid #2b3556;padding:13px 8px;border-radius:13px;text-align:center}.tile b{display:block;font-size:20px;color:#eae5ff}.tile span{font-size:10px;color:#99a5c9}.heading{font-size:12px;letter-spacing:2px;color:#aeb9dd;font-weight:850;margin:24px 4px 12px}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.day{border:1px solid #344064;background:#121a32;color:#b6c0df;border-radius:11px;padding:12px 0;font-size:11px;font-weight:850}.day.active{background:#6e55d8;color:white;border-color:#b49bff}.day.done{box-shadow:inset 0 -3px #53dfbc}.day small{display:block;font-size:9px;margin-top:4px;opacity:.8}.quest{border:1px solid #303d60;border-radius:14px;padding:13px;margin-top:9px;background:#0d1429}.quest.completed{border-color:#408b83;background:#102a30}.questtop{display:flex;gap:10px;align-items:center}.check{width:23px;height:23px;accent-color:#8f72ff;flex-shrink:0}.questname{font-weight:750;font-size:14px}.setrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.setbox{background:#19213b;border-radius:10px;padding:8px}.setbox label{display:block;font-size:10px;color:#a9b5d5;margin-bottom:5px}.setbox input{width:100%;border:1px solid #3d4a70;border-radius:7px;background:#0b1226;color:#fff;padding:8px 4px;text-align:center;font-size:13px}.weights{display:flex;gap:8px;align-items:center;margin-top:12px}.weights input{width:100px;max-width:35%;background:#0b1226;border:1px solid #46517b;border-radius:8px;color:#fff;padding:8px}.btn{border:0;border-radius:12px;background:#7863ed;color:#fff;font-weight:800;padding:13px 16px}.btn.secondary{background:#253050;color:#dbe2ff}.btn:disabled{opacity:.45}.footnav{position:fixed;bottom:0;left:0;right:0;background:#0d1428ed;border-top:1px solid #2c3557;display:flex;justify-content:center;padding:10px 12px max(12px,env(safe-area-inset-bottom));backdrop-filter:blur(15px)}.footnav button{flex:1;max-width:170px;border:0;background:none;color:#9caad2;padding:8px;font-weight:800;font-size:12px}.footnav button.selected{color:#c5a6ff}.hidden{display:none!important}.tag{background:#29305b;color:#c9baff;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:850}.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#302b68;border:1px solid #ab93ff;border-radius:12px;padding:12px 18px;max-width:90%;z-index:4;text-align:center;box-shadow:0 10px 40px #0009}.muted{color:#9fa9c9;font-size:12px;line-height:1.6}.history{border-bottom:1px solid #303a57;padding:11px 0;font-size:13px}.danger{background:#4a2336;color:#ffd7e1}h2{font-size:19px;margin:0 0 8px}input[type=number]{min-width:0}input[type=date]{color-scheme:dark}.pill{font-size:10px;color:#92ffe0;letter-spacing:1px}
-.system-avatar{position:fixed;right:12px;top:85px;z-index:10;opacity:0;transition:opacity .3s;pointer-events:none}.system-avatar.active{opacity:1}.system-core{width:76px;height:76px;border:2px solid #ab96ff;border-radius:50%;display:grid;place-items:center;background:#161a38;box-shadow:0 0 24px #7154ff88;color:#d5caff;font-size:32px}.system-avatar.speaking .system-core{animation:systemPulse .8s infinite alternate}@keyframes systemPulse{to{box-shadow:0 0 38px #ab96ff;transform:scale(1.08)}}.system-caption{font-size:10px;text-align:center;color:#ddd1ff;background:#151831;padding:5px;border-radius:5px;margin-top:5px;max-width:130px}</style></head><body><header><div class="eyebrow">SYSTEM INITIALIZED // HUNTER PROTOCOL</div><div class="brand">ASCEN<span>SION</span></div><div class="subtitle">Every completed set makes you stronger.</div></header><main class="container"><section id="dashboard"></section><section id="workout" class="hidden"></section><section id="history" class="hidden"></section><section id="settings" class="hidden"></section></main><nav class="footnav"><button data-tab="dashboard" class="selected">◈ STATUS</button><button data-tab="workout">⚔ QUESTS</button><button data-tab="history">▤ LOG</button><button data-tab="settings">⚙ CONFIG</button></nav><div id="systemAvatar" class="system-avatar" role="status"><div class="system-core">◇</div><div id="systemCaption" class="system-caption">SYSTEM</div></div><div id="toast" class="toast hidden"></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#080d1b" />
+    <title>ASCENSION - Hunter Fitness RPG</title>
+    <style>
+      :root {
+        --bg: #050914;
+        --bg-strong: #090d1b;
+        --panel: rgba(12, 17, 31, 0.85);
+        --panel-soft: rgba(18, 24, 42, 0.82);
+        --panel-strong: rgba(17, 24, 40, 0.98);
+        --border: rgba(118, 143, 255, 0.32);
+        --border-strong: rgba(129, 213, 255, 0.64);
+        --text: #edf5ff;
+        --text-soft: #a7b7d3;
+        --blue: #7bc7ff;
+        --cyan: #6be1ff;
+        --violet: #8f82ff;
+        --purple: #b08bff;
+        --gold: #f4d981;
+        --success: #6ef0c6;
+        --warning: #ffbf6b;
+        --danger: #ff7f8f;
+        --shadow: 0 18px 40px rgba(8, 13, 30, 0.7);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(circle at top, rgba(23, 36, 83, 0.9), transparent 38%),
+          radial-gradient(circle at bottom right, rgba(80, 45, 120, 0.26), transparent 26%),
+          var(--bg);
+        color: var(--text);
+        font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        letter-spacing: 0.02em;
+      }
+
+      button, input, textarea, select {
+        font: inherit;
+      }
+
+      .app-shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px 18px 52px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 20px;
+        margin-bottom: 18px;
+        background: rgba(10, 14, 24, 0.7);
+        border: 1px solid rgba(110, 144, 255, 0.2);
+        border-radius: 18px;
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg, rgba(124, 181, 255, 0.2), rgba(130, 95, 255, 0.34));
+        border: 1px solid rgba(108, 210, 255, 0.5);
+        box-shadow: inset 0 0 18px rgba(108, 210, 255, 0.28), 0 0 18px rgba(108, 210, 255, 0.14);
+      }
+
+      .brand-mark::before {
+        content: "A";
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--cyan);
+        letter-spacing: 0.12em;
+      }
+
+      .brand-name {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+      }
+
+      .title {
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .nav-btn {
+        appearance: none;
+        border: 1px solid rgba(112, 134, 255, 0.28);
+        background: rgba(23, 30, 49, 0.84);
+        color: var(--text-soft);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        background: linear-gradient(180deg, rgba(26, 36, 68, 0.96), rgba(17, 25, 43, 0.96));
+        border-color: rgba(115, 221, 255, 0.62);
+        color: var(--text);
+        box-shadow: inset 0 0 0 1px rgba(115, 221, 255, 0.2), 0 0 18px rgba(91, 166, 255, 0.18);
+      }
+
+      .view {
+        display: none;
+      }
+
+      .view.active {
+        display: block;
+      }
+
+      .panel {
+        position: relative;
+        background: linear-gradient(180deg, rgba(12, 18, 32, 0.96), rgba(11, 15, 26, 0.9));
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(95, 119, 255, 0.08), transparent 45%, rgba(104, 239, 255, 0.06));
+        pointer-events: none;
+      }
+
+      .panel-inner {
+        position: relative;
+        z-index: 1;
+        padding: 22px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+      }
+
+      .hero-title {
+        margin: 0 0 12px;
+        font-size: clamp(1.6rem, 3vw, 3rem);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        margin: 0;
+        color: var(--text-soft);
+        max-width: 62ch;
+        line-height: 1.7;
+      }
+
+      .status-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--cyan);
+      }
+
+      .status-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 12px rgba(110, 240, 198, 0.9);
+        animation: pulse 1.8s infinite ease-in-out;
+      }
+
+      .hero-metrics {
+        display: grid;
+        gap: 12px;
+      }
+
+      .metric-card {
+        padding: 18px 20px;
+        border-radius: 18px;
+        background: rgba(15, 20, 35, 0.94);
+        border: 1px solid rgba(124, 146, 255, 0.28);
+      }
+
+      .metric-label {
+        display: block;
+        color: var(--text-soft);
+        font-size: 0.66rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .metric-value {
+        font-size: clamp(1.4rem, 2rem, 2.4rem);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+
+      .xp-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+        color: var(--text-soft);
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .progress-track {
+        position: relative;
+        width: 100%;
+        height: 12px;
+        border-radius: 999px;
+        background: rgba(109, 127, 167, 0.2);
+        border: 1px solid rgba(138, 165, 255, 0.2);
+        overflow: hidden;
+        margin-top: 12px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--cyan), var(--purple), var(--gold));
+        box-shadow: 0 0 18px rgba(88, 204, 255, 0.7);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .section-head h2,
+      .section-head h3 {
+        margin: 0;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.86rem;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(120, 191, 255, 0.26);
+        background: rgba(17, 25, 42, 0.7);
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--cyan);
+      }
+
+      .exercise-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .exercise-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: rgba(18, 23, 38, 0.75);
+        border: 1px solid rgba(104, 131, 196, 0.2);
+      }
+
+      .exercise-item input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--cyan);
+        cursor: pointer;
+      }
+
+      .exercise-item .meta {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .exercise-item strong {
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+
+      .exercise-item span {
+        color: var(--text-soft);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .today-card {
+        padding: 20px;
+        border-radius: 18px;
+        background: linear-gradient(160deg, rgba(19, 25, 46, 0.96), rgba(12, 17, 30, 0.96));
+        border: 1px solid rgba(123, 162, 255, 0.28);
+      }
+
+      .day-grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .day-pill {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 8px;
+        border-radius: 12px;
+        border: 1px solid rgba(109, 122, 184, 0.3);
+        background: rgba(17, 22, 35, 0.82);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: var(--text-soft);
+      }
+
+      .day-pill strong {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .day-pill small {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+      }
+
+      .day-pill.active {
+        background: linear-gradient(180deg, rgba(18, 33, 57, 0.96), rgba(10, 20, 37, 0.96));
+        border-color: rgba(129, 216, 255, 0.62);
+        color: var(--text);
+        box-shadow: inset 0 0 0 1px rgba(129, 216, 255, 0.18);
+      }
+
+      .day-pill.done {
+        border-color: rgba(110, 240, 198, 0.48);
+      }
+
+      .history-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .history-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: rgba(16, 22, 35, 0.8);
+        border: 1px solid rgba(118, 140, 205, 0.24);
+      }
+
+      .history-item strong {
+        display: block;
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+      }
+
+      .history-item span {
+        display: block;
+        color: var(--text-soft);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgba(107, 225, 255, 0.08);
+        border: 1px solid rgba(107, 225, 255, 0.22);
+        color: var(--cyan);
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field label {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+      }
+
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        border: 1px solid rgba(125, 143, 208, 0.25);
+        background: rgba(17, 24, 39, 0.92);
+        border-radius: 14px;
+        color: var(--text);
+        padding: 14px 16px;
+        outline: none;
+      }
+
+      .field input:focus,
+      .field textarea:focus,
+      .field select:focus {
+        border-color: rgba(115, 221, 255, 0.72);
+        box-shadow: 0 0 0 3px rgba(72, 168, 255, 0.14);
+      }
+
+      .settings-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .action-btn {
+        appearance: none;
+        border: 1px solid rgba(126, 161, 255, 0.3);
+        background: linear-gradient(180deg, rgba(22, 31, 51, 0.98), rgba(13, 18, 31, 0.98));
+        color: var(--text);
+        padding: 12px 16px;
+        border-radius: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .action-btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(107, 225, 255, 0.52);
+      }
+
+      .action-btn.warn {
+        border-color: rgba(255, 137, 162, 0.48);
+        color: #ffd1da;
+      }
+
+      .action-btn.primary {
+        border-color: rgba(118, 195, 255, 0.48);
+        color: var(--cyan);
+      }
+
+      .system-avatar {
+        position: fixed;
+        right: 22px;
+        top: 115px;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-12px) scale(0.92);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+      }
+
+      .system-avatar.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .system-core {
+        position: relative;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, rgba(105, 235, 255, 0.88), rgba(81, 98, 255, 0.26) 42%, rgba(14, 18, 31, 0.9) 70%);
+        border: 1px solid rgba(124, 214, 255, 0.62);
+        box-shadow: 0 0 32px rgba(96, 211, 255, 0.26), inset 0 0 18px rgba(113, 207, 255, 0.18);
+        animation: idleFloat 4.2s ease-in-out infinite;
+      }
+
+      .system-core::before,
+      .system-core::after {
+        content: "";
+        position: absolute;
+        inset: 10px;
+        border-radius: 50%;
+        border: 1px solid rgba(145, 218, 255, 0.5);
+      }
+
+      .system-core::after {
+        inset: 21px;
+        border-color: rgba(167, 131, 255, 0.6);
+        box-shadow: inset 0 0 10px rgba(167, 131, 255, 0.3);
+      }
+
+      .system-avatar[data-state="speaking"] .system-core {
+        animation: speakPulse 0.8s ease-in-out infinite;
+      }
+
+      .system-avatar[data-state="idle"] .system-core {
+        animation: idleFloat 3.2s ease-in-out infinite;
+      }
+
+      .system-caption {
+        max-width: 170px;
+        text-align: center;
+        color: var(--cyan);
+        font-size: 0.64rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(110, 224, 255, 0.4);
+      }
+
+      .system-toast {
+        position: fixed;
+        left: 50%;
+        top: 28px;
+        transform: translateX(-50%) translateY(-14px);
+        min-width: min(90vw, 520px);
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: rgba(9, 15, 28, 0.85);
+        border: 1px solid rgba(127, 196, 255, 0.32);
+        box-shadow: 0 18px 26px rgba(8, 11, 22, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 60;
+      }
+
+      .system-toast.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px);
+      }
+
+      .system-toast strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.68rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--cyan);
+      }
+
+      .system-toast span {
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .system-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(6, 10, 19, 0.72);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      .system-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .system-dialogue {
+        width: min(88vw, 760px);
+        padding: 32px 30px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(8, 12, 23, 0.96), rgba(12, 18, 30, 0.9));
+        border: 1px solid rgba(134, 170, 255, 0.35);
+        box-shadow: 0 35px 55px rgba(0, 0, 0, 0.42);
+      }
+
+      .system-dialogue .eyebrow {
+        margin-bottom: 10px;
+      }
+
+      .system-dialogue h3 {
+        margin: 0 0 14px;
+        font-size: clamp(1.3rem, 2.2vw, 2.2rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .system-dialogue p {
+        margin: 0;
+        color: var(--text-soft);
+        line-height: 1.8;
+        font-size: 1rem;
+      }
+
+      .system-close {
+        margin-top: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(118, 197, 255, 0.42);
+        background: rgba(16, 29, 48, 0.92);
+        color: var(--cyan);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.32); opacity: 0.8; }
+      }
+
+      @keyframes idleFloat {
+        0%, 100% { transform: translateY(0px) scale(1); }
+        50% { transform: translateY(-8px) scale(1.04); }
+      }
+
+      @keyframes speakPulse {
+        0%, 100% { transform: scale(1) translateY(0); box-shadow: 0 0 18px rgba(96, 211, 255, 0.22); }
+        50% { transform: scale(1.08) translateY(-3px); box-shadow: 0 0 32px rgba(96, 211, 255, 0.5); }
+      }
+
+      @media (max-width: 860px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          width: 100%;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+
+        .day-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        .app-shell {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .topbar {
+          padding: 16px;
+        }
+
+        .nav-btn {
+          flex: 1 1 calc(50% - 8px);
+          text-align: center;
+        }
+
+        .day-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .system-avatar {
+          top: auto;
+          bottom: 18px;
+          right: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-name">
+            <span class="eyebrow">System status</span>
+            <span class="title">ASCENSION</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-btn active" data-tab="dashboard" type="button">Dashboard</button>
+          <button class="nav-btn" data-tab="workout" type="button">Workout</button>
+          <button class="nav-btn" data-tab="history" type="button">History</button>
+          <button class="nav-btn" data-tab="settings" type="button">Settings</button>
+        </nav>
+      </header>
+
+      <main>
+        <section id="dashboard" class="view active" aria-live="polite"></section>
+        <section id="workout" class="view" aria-live="polite"></section>
+        <section id="history" class="view" aria-live="polite"></section>
+        <section id="settings" class="view" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <div id="systemAvatar" class="system-avatar" data-state="idle" aria-live="polite">
+      <div class="system-core" aria-hidden="true"></div>
+      <div id="systemCaption" class="system-caption">System online</div>
+    </div>
+
+    <div id="toast" class="system-toast" aria-live="polite">
+      <strong>System notice</strong>
+      <span id="toastMessage">Awaiting directives.</span>
+    </div>
+
+    <div id="systemOverlay" class="system-overlay" aria-hidden="true">
+      <div class="system-dialogue">
+        <div class="eyebrow">System interface</div>
+        <h3>Direct transmission</h3>
+        <p id="systemDialogueText">Initialising training protocols.</p>
+        <button id="systemClose" class="system-close" type="button">Acknowledge</button>
+      </div>
+    </div>
+
+    <script>
+      'use strict';
+
+      const STORAGE_KEY = 'ascension_v1';
+      const workoutTypes = ['Push A', 'Rest', 'Pull A', 'Legs A', 'Rotate', 'Run', 'Rest'];
+      const exercises = {
+        'Push A': ['Barbell Bench Press', 'Incline Dumbbell Press', 'Seated Shoulder Press', 'Dumbbell Lateral Raise', 'Cable Triceps Pushdown'],
+        'Pull A': ['Lat Pulldown', 'Seated Cable Row', 'Chest-Supported Row', 'Reverse Pec Deck', 'Dumbbell Biceps Curl', 'Hammer Curl'],
+        'Legs A': ['Barbell Squat', 'Leg Press', 'Romanian Deadlift', 'Seated Leg Curl', 'Standing Calf Raise'],
+        'Push B': ['Incline Dumbbell Press', 'Machine Chest Press', 'Cable Lateral Raise', 'Overhead Triceps Extension'],
+        'Pull B': ['Close-Grip Pulldown', 'Single-Arm Dumbbell Row', 'Face Pull', 'Preacher Curl'],
+        'Legs B': ['Hack Squat', 'Leg Extension', 'Lying Leg Curl', 'Seated Calf Raise'],
+        'Run': ['Saturday Run — 25–35 min easy pace']
+      };
+
+      let state = {};
+      let selected = todayISO();
+      let tab = 'dashboard';
+      let toastTimer = 0;
+
+      function localISO(date) {
+        return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+      }
+
+      function parseISO(iso) {
+        const [year, month, day] = iso.split('-').map(Number);
+        return new Date(year, (month || 1) - 1, day || 1);
+      }
+
+      function todayISO() {
+        return localISO(new Date());
+      }
+
+      function monday(dateISO) {
+        const date = parseISO(dateISO);
+        const day = date.getDay();
+        const diff = (day === 0 ? -6 : 1) - day; // Monday start
+        date.setDate(date.getDate() + diff);
+        return localISO(date);
+      }
+
+      function addDays(iso, amount) {
+        const date = parseISO(iso);
+        date.setDate(date.getDate() + amount);
+        return localISO(date);
+      }
+
+      function workoutFor(dateISO) {
+        const date = parseISO(dateISO);
+        const day = date.getDay();
+        if (day === 0 || day === 2) return 'Rest';
+        if (day === 1) return 'Push A';
+        if (day === 3) return 'Legs A';
+        if (day === 4) return 'Rotate';
+        if (day === 5) return 'Run';
+        if (day === 6) return 'Rest';
+        return 'Pull A';
+      }
+
+      function safeLoad() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : {};
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function save() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function record(dateISO) {
+        state.records ||= {};
+        state.records[dateISO] ||= { items: {}, claimed: false };
+        return state.records[dateISO];
+      }
+
+      function xp() {
+        let total = 0;
+        for (const entry of Object.values(state.records || {})) {
+          for (const item of Object.values(entry.items || {})) {
+            if (item.done) total += Number(item.xp || 0);
+          }
+          if (entry.claimed) total += 150;
+        }
+        return total;
+      }
+
+      function itemFor(dateISO, exerciseName) {
+        const rec = record(dateISO);
+        rec.items ||= {};
+        const key = exerciseName.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+        rec.items[key] ||= { name: exerciseName, done: false, xp: exerciseName.toLowerCase().includes('run') ? 100 : 30 };
+        return rec.items[key];
+      }
+
+      function formatDateLabel(dateISO) {
+        return parseISO(dateISO).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      }
+
+      function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+      }
+
+      function setSystemState(active, speaking) {
+        const avatar = document.getElementById('systemAvatar');
+        if (!avatar) return;
+        avatar.classList.toggle('active', !!active);
+        avatar.dataset.state = speaking ? 'speaking' : 'idle';
+      }
+
+      function showNotification(message, options = {}) {
+        const { voice = true, overlay = false } = options;
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        if (toast && toastMessage) {
+          toastMessage.textContent = message;
+          toast.classList.add('visible');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
+        }
+
+        const overlayEl = document.getElementById('systemOverlay');
+        const overlayText = document.getElementById('systemDialogueText');
+        if (overlayEl && overlayText) {
+          overlayText.textContent = message;
+          if (overlay) {
+            overlayEl.classList.add('visible');
+            overlayEl.setAttribute('aria-hidden', 'false');
+          }
+        }
+
+        const avatar = document.getElementById('systemAvatar');
+        const caption = document.getElementById('systemCaption');
+        if (avatar && caption) {
+          caption.textContent = 'System online';
+          setSystemState(true, true);
+          clearTimeout(window.systemResetTimer);
+          window.systemResetTimer = setTimeout(() => setSystemState(true, false), 2200);
+        }
+
+        if (voice && state.settings?.speechEnabled && 'speechSynthesis' in window) {
+          const synth = window.speechSynthesis;
+          synth.cancel();
+          const utterance = new SpeechSynthesisUtterance(message.replace(/[+✓·]/g, ''));
+          utterance.rate = 0.9;
+          utterance.pitch = 0.76;
+          utterance.volume = 0.85;
+          const voices = synth.getVoices();
+          const preferred = voices.find((voiceOption) => /google|samantha|daniel|zira|narrator|alex|victoria/i.test(voiceOption.name) || voiceOption.lang.toLowerCase().startsWith('en')) || voices[0];
+          if (preferred) utterance.voice = preferred;
+          utterance.onend = () => setSystemState(true, false);
+          synth.speak(utterance);
+        }
+      }
+
+      function renderDashboard() {
+        const totalXP = xp();
+        const progress = totalXP % 500;
+        const percent = Math.min(100, Math.round((progress / 500) * 100));
+        const workout = workoutFor(selected);
+        const dailyRecord = record(selected);
+        const completed = Object.values(dailyRecord.items || {}).filter((item) => item.done).length;
+        const totalForDay = workout === 'Rest' ? 0 : (exercises[workout] || []).length;
+
+        document.getElementById('dashboard').innerHTML = `
+          <div class="panel hero">
+            <div class="panel-inner">
+              <div class="status-line"><span class="status-dot"></span> Hunter status</div>
+              <h1 class="hero-title">${escapeHTML(state.name || 'HUNTER')}</h1>
+              <p class="hero-copy">${escapeHTML(state.name || 'HUNTER')} remains aligned with the current cycle. ${workout === 'Rest' ? 'Recovery protocols remain active.' : 'Combat drills are live.'}</p>
+              <div class="xp-row" style="margin-top:20px;">
+                <span>Total XP</span>
+                <span>${totalXP}</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width:${percent}%"></div>
+              </div>
+            </div>
+            <div class="panel-inner hero-metrics">
+              <div class="metric-card">
+                <span class="metric-label">Current objective</span>
+                <div class="metric-value">${workout === 'Rest' ? 'Recovery' : workout}</div>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Daily completion</span>
+                <div class="metric-value">${completed}/${totalForDay || 0}</div>
+                <div class="xp-row">
+                  <span>Cycle</span>
+                  <span>${formatDateLabel(selected)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel stack">
+              <div class="panel-inner">
+                <div class="section-head">
+                  <h2>Mission board</h2>
+                  <span class="tag">Active</span>
+                </div>
+                <div class="exercise-list">
+                  ${workout === 'Rest' ? '<div class="exercise-item"><div class="meta"><strong>Recovery protocol</strong><span>Rest, stretch, hydrate, and reset</span></div></div>' : (exercises[workout] || []).slice(0, 4).map((exercise) => {
+                    const item = itemFor(selected, exercise);
+                    return `
+                      <label class="exercise-item">
+                        <input type="checkbox" data-exercise-toggle="${escapeHTML(exercise)}" ${item.done ? 'checked' : ''} />
+                        <div class="meta">
+                          <strong>${escapeHTML(exercise)}</strong>
+                          <span>+${item.xp || 30} XP</span>
+                        </div>
+                      </label>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-inner">
+                <div class="section-head">
+                  <h3>Week overview</h3>
+                  <span class="tag">RPG</span>
+                </div>
+                <div class="today-card">
+                  <div class="day-grid">
+                    ${Array.from({ length: 7 }, (_, index) => {
+                      const dayISO = addDays(monday(selected), index);
+                      const dayWorkout = workoutFor(dayISO);
+                      const isActive = dayISO === selected;
+                      const complete = Object.values(record(dayISO).items || {}).filter((item) => item.done).length;
+                      return `
+                        <button class="day-pill ${isActive ? 'active' : ''} ${complete > 0 ? 'done' : ''}" type="button" data-select-day="${dayISO}">
+                          <strong>${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][index]}</strong>
+                          <small>${dayWorkout === 'Rest' ? 'Rest' : dayWorkout.replace(' A', '').replace(' B', '')}</small>
+                        </button>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.querySelectorAll('[data-select-day]').forEach((button) => {
+          button.addEventListener('click', () => {
+            selected = button.dataset.selectDay;
+            render();
+          });
+        });
+
+        document.querySelectorAll('[data-exercise-toggle]').forEach((input) => {
+          input.addEventListener('change', (event) => {
+            const itemName = event.target.dataset.exerciseToggle;
+            const targetItem = itemFor(selected, itemName);
+            targetItem.done = event.target.checked;
+            save();
+            showNotification(`${targetItem.done ? 'Objective complete' : 'Objective reset'}: ${itemName}`, { voice: true, overlay: false });
+            render();
+          });
+        });
+      }
+
+      function renderWorkout() {
+        const weekStart = monday(selected);
+        const currentWorkout = workoutFor(selected);
+
+        const dayCards = Array.from({ length: 7 }, (_, index) => {
+          const iso = addDays(weekStart, index);
+          const workout = workoutFor(iso);
+          const isSelected = iso === selected;
+          const doneCount = Object.values(record(iso).items || {}).filter((item) => item.done).length;
+          return `
+            <button class="day-pill ${isSelected ? 'active' : ''} ${doneCount > 0 ? 'done' : ''}" type="button" data-select-day="${iso}">
+              <strong>${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][index]}</strong>
+              <small>${workout}</small>
+            </button>
+          `;
+        }).join('');
+
+        const workoutItems = currentWorkout === 'Rest'
+          ? '<div class="exercise-item"><div class="meta"><strong>Recovery cycle</strong><span>Walk, stretch, hydrate, and prepare for the next ascent.</span></div></div>'
+          : (exercises[currentWorkout] || []).map((exercise) => {
+              const item = itemFor(selected, exercise);
+              return `
+                <label class="exercise-item">
+                  <input type="checkbox" data-exercise-toggle="${escapeHTML(exercise)}" ${item.done ? 'checked' : ''} />
+                  <div class="meta">
+                    <strong>${escapeHTML(exercise)}</strong>
+                    <span>+${item.xp || 30} XP</span>
+                  </div>
+                </label>
+              `;
+            }).join('');
+
+        document.getElementById('workout').innerHTML = `
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="section-head">
+                <h2>Training protocol</h2>
+                <span class="tag">${currentWorkout}</span>
+              </div>
+              <div class="today-card" style="margin-bottom:18px;">
+                <div class="day-grid">${dayCards}</div>
+              </div>
+              <div class="exercise-list">${workoutItems}</div>
+            </div>
+          </div>
+        `;
+
+        document.querySelectorAll('[data-select-day]').forEach((button) => {
+          button.addEventListener('click', () => {
+            selected = button.dataset.selectDay;
+            render();
+          });
+        });
+
+        document.querySelectorAll('[data-exercise-toggle]').forEach((input) => {
+          input.addEventListener('change', (event) => {
+            const itemName = event.target.dataset.exerciseToggle;
+            const targetItem = itemFor(selected, itemName);
+            targetItem.done = event.target.checked;
+            save();
+            showNotification(`${targetItem.done ? 'Objective cleared' : 'Objective reopened'} — ${itemName}`, { voice: true });
+            render();
+          });
+        });
+      }
+
+      function renderHistory() {
+        const historyDates = Object.keys(state.records || {}).sort().reverse();
+        const entries = historyDates.length
+          ? historyDates.map((dateISO) => {
+              const entry = state.records[dateISO];
+              const done = Object.values(entry.items || {}).filter((item) => item.done).length;
+              const xpValue = Object.values(entry.items || {}).reduce((sum, item) => sum + (item.done ? Number(item.xp || 0) : 0), 0) + (entry.claimed ? 150 : 0);
+              return `
+                <div class="history-item">
+                  <div>
+                    <strong>${formatDateLabel(dateISO)}</strong>
+                    <span>${done} objectives cleared</span>
+                  </div>
+                  <div class="chip">+${xpValue} XP</div>
+                </div>
+              `;
+            }).join('')
+          : '<div class="history-item"><div><strong>No combat logs yet</strong><span>Complete an objective to begin your archive.</span></div></div>';
+
+        document.getElementById('history').innerHTML = `
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="section-head">
+                <h2>Archive</h2>
+                <span class="tag">${historyDates.length} days</span>
+              </div>
+              <div class="history-list">${entries}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderSettings() {
+        const speechEnabled = Boolean(state.settings?.speechEnabled ?? true);
+        document.getElementById('settings').innerHTML = `
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="section-head">
+                <h2>System configuration</h2>
+                <span class="tag">Profile</span>
+              </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="hunterName">Hunter designation</label>
+                  <input id="hunterName" maxlength="20" value="${escapeHTML(state.name || 'HUNTER')}" />
+                </div>
+                <div class="field">
+                  <label for="voiceMode">System voice</label>
+                  <select id="voiceMode">
+                    <option value="enabled" ${speechEnabled ? 'selected' : ''}>Enabled</option>
+                    <option value="disabled" ${!speechEnabled ? 'selected' : ''}>Muted</option>
+                  </select>
+                </div>
+              </div>
+              <div class="settings-actions" style="margin-top:20px;">
+                <button id="exportBackup" class="action-btn primary" type="button">Export backup</button>
+                <label for="importBackup" class="action-btn" style="cursor:pointer;">Import backup</label>
+                <input id="importBackup" type="file" accept="application/json" style="display:none;" />
+                <button id="resetProgress" class="action-btn warn" type="button">Reset progress</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const hunterNameInput = document.getElementById('hunterName');
+        hunterNameInput.addEventListener('input', (event) => {
+          state.name = event.target.value.toUpperCase().slice(0, 20);
+          save();
+          renderDashboard();
+        });
+
+        document.getElementById('voiceMode').addEventListener('change', (event) => {
+          state.settings ||= {};
+          state.settings.speechEnabled = event.target.value === 'enabled';
+          save();
+          showNotification(state.settings.speechEnabled ? 'System voice enabled' : 'System voice muted', { voice: false, overlay: true });
+        });
+
+        document.getElementById('exportBackup').addEventListener('click', () => {
+          const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'ascension-backup.json';
+          link.click();
+          URL.revokeObjectURL(url);
+          showNotification('Backup export queued', { voice: true, overlay: false });
+        });
+
+        document.getElementById('importBackup').addEventListener('change', (event) => {
+          const file = event.target.files && event.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            try {
+              const imported = JSON.parse(String(reader.result));
+              state = { ...state, ...imported };
+              save();
+              render();
+              showNotification('Archive synced successfully', { voice: true, overlay: true });
+            } catch (error) {
+              showNotification('Import failed: invalid backup file', { voice: true, overlay: true });
+            }
+          };
+          reader.readAsText(file);
+          event.target.value = '';
+        });
+
+        document.getElementById('resetProgress').addEventListener('click', () => {
+          const confirmed = window.confirm('Reset all training data and return to a fresh hunter profile?');
+          if (!confirmed) return;
+          state = { start: todayISO(), records: {}, weights: {}, name: 'HUNTER', progressPct: 2.5, settings: { speechEnabled: true } };
+          save();
+          render();
+          showNotification('Hunter profile reset. New cycle initialized.', { voice: true, overlay: true });
+        });
+      }
+
+      function render() {
+        document.querySelectorAll('.nav-btn').forEach((button) => {
+          button.classList.toggle('active', button.dataset.tab === tab);
+        });
+        document.querySelectorAll('.view').forEach((view) => {
+          view.classList.toggle('active', view.id === tab);
+        });
+
+        renderDashboard();
+        renderWorkout();
+        renderHistory();
+        renderSettings();
+      }
+
+      function initialize() {
+        state = safeLoad();
+        state.records ||= {};
+        state.weights ||= {};
+        state.name ||= 'HUNTER';
+        state.progressPct ??= 2.5;
+        state.settings ||= { speechEnabled: true };
+        state.start ||= monday(todayISO());
+
+        document.querySelectorAll('[data-tab]').forEach((button) => {
+          button.addEventListener('click', () => {
+            tab = button.dataset.tab;
+            render();
+          });
+        });
+
+        document.getElementById('systemClose').addEventListener('click', () => {
+          document.getElementById('systemOverlay').classList.remove('visible');
+          document.getElementById('systemOverlay').setAttribute('aria-hidden', 'true');
+        });
+
+        setSystemState(true, false);
+        showNotification('System initialized. Training protocols online.', { voice: true, overlay: true });
+        render();
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+
+      if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = () => {
+          if (state.settings?.speechEnabled) {
+            showNotification('System voice ready.', { voice: false, overlay: false });
+          }
+        };
+      }
+
+      initialize();
+    </script>
+  </body>
+</html>
