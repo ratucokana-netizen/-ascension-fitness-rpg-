@@ -7,9 +7,9 @@
     <title>ASCENSION - Hunter Fitness RPG</title>
     <style>
       :root {
-        --bg: #050914;
+        --bg: #030510;
         --bg-strong: #090d1b;
-        --panel: rgba(12, 17, 31, 0.85);
+        --panel: rgba(8, 14, 35, 0.92);
         --panel-soft: rgba(18, 24, 42, 0.82);
         --panel-strong: rgba(17, 24, 40, 0.98);
         --border: rgba(118, 143, 255, 0.32);
@@ -17,8 +17,8 @@
         --text: #edf5ff;
         --text-soft: #a7b7d3;
         --blue: #7bc7ff;
-        --cyan: #6be1ff;
-        --violet: #8f82ff;
+        --cyan: #79e5ff;
+        --violet: #9465ff;
         --purple: #b08bff;
         --gold: #f4d981;
         --success: #6ef0c6;
@@ -32,10 +32,7 @@
       html, body {
         margin: 0;
         min-height: 100%;
-        background:
-          radial-gradient(circle at top, rgba(23, 36, 83, 0.9), transparent 38%),
-          radial-gradient(circle at bottom right, rgba(80, 45, 120, 0.26), transparent 26%),
-          var(--bg);
+        background: radial-gradient(ellipse at 50% -10%, rgba(58, 45, 133, 0.42), transparent 50%), radial-gradient(ellipse at 100% 80%, rgba(8, 96, 151, 0.13), transparent 48%), repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(119, 164, 255, 0.022) 48px), #030510;
         color: var(--text);
         font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
       }
@@ -698,6 +695,26 @@
         50% { transform: scale(1.08) translateY(-3px); box-shadow: 0 0 32px rgba(96, 211, 255, 0.5); }
       }
 
+      /* Ascension System: restrained, high-contrast Solo Leveling-inspired HUD */
+      .topbar { border-radius: 5px; border: 1px solid rgba(118,174,255,.35); background: linear-gradient(120deg,rgba(7,12,30,.98),rgba(16,10,41,.96)); box-shadow: 0 0 35px rgba(83,82,216,.13), inset 0 1px rgba(144,205,255,.13); }
+      .brand-mark { transform:rotate(45deg); border-radius:2px; background:linear-gradient(135deg,#201747,#061e3d); }
+      .brand-mark::before { transform:rotate(-45deg); color:#c6efff; text-shadow:0 0 10px #60dfff; }
+      .title,.hero-title { color:#f4f6ff; text-shadow:0 0 22px rgba(130,109,255,.32); }
+      .panel { border-radius:6px; border:1px solid rgba(116,145,245,.3); box-shadow:inset 0 1px rgba(145,197,255,.09),0 15px 35px rgba(0,0,0,.48),0 0 24px rgba(86,56,199,.08); }
+      .panel::after { content:""; position:absolute; top:0; left:0; width:55px; height:2px; background:linear-gradient(90deg,#76ddff,transparent); pointer-events:none; }
+      .metric-card,.today-card,.history-item,.exercise-item { border-radius:4px; background:linear-gradient(130deg,rgba(14,22,50,.94),rgba(7,12,29,.96)); }
+      .nav-btn,.action-btn,.tag,.chip { border-radius:3px; }
+      .nav-btn.active { background:linear-gradient(120deg,rgba(45,42,112,.92),rgba(13,39,72,.92)); box-shadow:inset 0 0 14px rgba(116,133,255,.15),0 0 18px rgba(80,147,255,.12); }
+      .section-head h2,.section-head h3 { color:#b8d9ff; letter-spacing:.22em; }
+      .v2-set { display:grid; grid-template-columns:35px repeat(3,minmax(0,1fr)) auto; gap:8px; align-items:end; padding:13px 8px; margin-top:8px; border:1px solid rgba(95,128,221,.24); background:rgba(6,11,28,.8); }
+      .v2-set.logged { border-color:rgba(96,219,255,.6); box-shadow:inset 3px 0 rgba(97,220,255,.6); }
+      .v2-set-index { align-self:center; color:#8a80db; font-size:1.05rem; font-weight:800; }
+      .v2-set label { display:grid; gap:5px; font-size:.64rem; text-transform:uppercase; letter-spacing:.1em; color:#9cb4db; }
+      .v2-set input { width:100%; min-width:0; padding:12px 6px; text-align:center; color:#f3f9ff; font-size:1rem; font-weight:700; border:1px solid rgba(110,158,248,.36); border-radius:2px; background:#080f26; outline:none; }
+      .v2-set input:focus { border-color:#8be7ff; box-shadow:0 0 0 2px rgba(96,213,255,.12); }
+      .v2-set-status { align-self:center; font-size:.58rem; color:#89a0c4; letter-spacing:.1em; white-space:nowrap; }
+      .v2-set.logged .v2-set-status { color:#76e9ff; }
+      @media(max-width:560px) { .v2-set { grid-template-columns:25px repeat(3,minmax(0,1fr)); gap:5px; padding:10px 4px; } .v2-set-status { grid-column:2/-1; font-size:.57rem; } .v2-set input {padding:12px 2px;} }
       @media (max-width: 860px) {
         .topbar {
           align-items: flex-start;
@@ -1038,18 +1055,7 @@
                   <span class="tag">Active</span>
                 </div>
                 <div class="exercise-list">
-                  ${workout === 'Rest' ? '<div class="exercise-item"><div class="meta"><strong>Recovery protocol</strong><span>Rest, stretch, hydrate, and reset</span></div></div>' : (exercises[workout] || []).slice(0, 4).map((exercise) => {
-                    const item = itemFor(selected, exercise);
-                    return `
-                      <label class="exercise-item">
-                        <input type="checkbox" data-exercise-toggle="${escapeHTML(exercise)}" ${item.done ? 'checked' : ''} />
-                        <div class="meta">
-                          <strong>${escapeHTML(exercise)}</strong>
-                          <span>+${item.xp || 30} XP</span>
-                        </div>
-                      </label>
-                    `;
-                  }).join('')}
+                  <div class="exercise-item"><div class="meta"><strong>Manual training log</strong><span>Open Workout to enter sets, reps and weight. No checklist required.</span></div></div>
                 </div>
               </div>
             </div>
@@ -1088,16 +1094,7 @@
           });
         });
 
-        document.querySelectorAll('[data-exercise-toggle]').forEach((input) => {
-          input.addEventListener('change', (event) => {
-            const itemName = event.target.dataset.exerciseToggle;
-            const targetItem = itemFor(selected, itemName);
-            targetItem.done = event.target.checked;
-            save();
-            showNotification(`${targetItem.done ? 'Objective complete' : 'Objective reset'}: ${itemName}`, { voice: true, overlay: false });
-            render();
-          });
-        });
+
       }
 
       function renderWorkout() {
@@ -1117,20 +1114,7 @@
           `;
         }).join('');
 
-        const workoutItems = currentWorkout === 'Rest'
-          ? '<div class="exercise-item"><div class="meta"><strong>Recovery cycle</strong><span>Walk, stretch, hydrate, and prepare for the next ascent.</span></div></div>'
-          : (exercises[currentWorkout] || []).map((exercise) => {
-              const item = itemFor(selected, exercise);
-              return `
-                <label class="exercise-item">
-                  <input type="checkbox" data-exercise-toggle="${escapeHTML(exercise)}" ${item.done ? 'checked' : ''} />
-                  <div class="meta">
-                    <strong>${escapeHTML(exercise)}</strong>
-                    <span>+${item.xp || 30} XP</span>
-                  </div>
-                </label>
-              `;
-            }).join('');
+        const workoutItems = '<div class="exercise-item"><div class="meta"><strong>Session input</strong><span>Use the tracker above to record reps and load for each set.</span></div></div>';
 
         document.getElementById('workout').innerHTML = `
           <div id="training-v2"></div>
@@ -1155,16 +1139,7 @@
           });
         });
 
-        document.querySelectorAll('[data-exercise-toggle]').forEach((input) => {
-          input.addEventListener('change', (event) => {
-            const itemName = event.target.dataset.exerciseToggle;
-            const targetItem = itemFor(selected, itemName);
-            targetItem.done = event.target.checked;
-            save();
-            showNotification(`${targetItem.done ? 'Objective cleared' : 'Objective reopened'} — ${itemName}`, { voice: true });
-            render();
-          });
-        });
+
       }
 
       function renderHistory() {
