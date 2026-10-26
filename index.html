@@ -913,6 +913,10 @@
         const caption = document.getElementById('systemCaption');
         const plainText = message.replace(/[+✓·]/g, '').trim();
         const nativeTTS = window.Capacitor?.Plugins?.TextToSpeech;
+        const voiceProfile = state.settings?.voiceProfile || 'jarvis';
+        const voiceRate = voiceProfile === 'jarvis' ? 0.94 : 0.9;
+        const voicePitch = voiceProfile === 'jarvis' ? 0.88 : 1.0;
+        const voiceLocale = voiceProfile === 'jarvis' ? 'en-GB' : 'en-US';
 
         if (caption) caption.textContent = 'Transmitting';
         setSystemState(true, true);
@@ -921,15 +925,18 @@
           if (nativeTTS && window.Capacitor?.isNativePlatform?.()) {
             await nativeTTS.stop().catch(() => {});
             if (request !== voiceRequest) return;
-            await nativeTTS.speak({ text: plainText, lang: 'en-US', rate: 0.9, pitch: 0.8, volume: 1, category: 'playback' });
+            await nativeTTS.speak({ text: plainText, lang: voiceLocale, rate: voiceRate, pitch: voicePitch, volume: 1, category: 'playback' });
           } else if ('speechSynthesis' in window) {
             const synth = window.speechSynthesis;
             synth.cancel();
             await new Promise((resolve, reject) => {
               const utterance = new SpeechSynthesisUtterance(plainText);
-              utterance.lang = 'en-US';
-              utterance.rate = 0.9;
-              utterance.pitch = 0.8;
+              utterance.lang = voiceLocale;
+              utterance.rate = voiceRate;
+              utterance.pitch = voicePitch;
+              const availableVoices = synth.getVoices();
+              const britishVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith('en-gb'));
+              if (voiceProfile === 'jarvis' && britishVoice) utterance.voice = britishVoice;
               utterance.volume = 1;
               utterance.onend = resolve;
               utterance.onerror = (event) => reject(new Error(event.error || 'Speech unavailable'));
@@ -1201,6 +1208,13 @@
                   <input id="hunterName" maxlength="20" value="${escapeHTML(state.name || 'HUNTER')}" />
                 </div>
                 <div class="field">
+                  <label for="voiceProfile">Voice personality</label>
+                  <select id="voiceProfile">
+                    <option value="jarvis" ${state.settings?.voiceProfile !== 'standard' ? 'selected' : ''}>Sentinel — British AI assistant</option>
+                    <option value="standard" ${state.settings?.voiceProfile === 'standard' ? 'selected' : ''}>Standard — neutral</option>
+                  </select>
+                </div>
+                <div class="field">
                   <label for="voiceMode">System voice</label>
                   <select id="voiceMode">
                     <option value="enabled" ${speechEnabled ? 'selected' : ''}>Enabled</option>
@@ -1226,6 +1240,13 @@
           renderDashboard();
         });
 
+        document.getElementById('voiceProfile').addEventListener('change', (event) => {
+          state.settings ||= {};
+          state.settings.voiceProfile = event.target.value;
+          save();
+          showNotification('Voice profile updated.', { voice: false });
+        });
+
         document.getElementById('voiceMode').addEventListener('change', (event) => {
           state.settings ||= {};
           state.settings.speechEnabled = event.target.value === 'enabled';
@@ -1234,7 +1255,7 @@
         });
 
         document.getElementById('testVoice').addEventListener('click', () => {
-          showNotification('System online. Voice transmission test initiated.', { voice: true, overlay: false });
+          showNotification('Good evening, Hunter. All systems are operational. Your training protocol is ready. Shall we begin?', { voice: true, overlay: false });
         });
 
         document.getElementById('exportBackup').addEventListener('click', () => {
