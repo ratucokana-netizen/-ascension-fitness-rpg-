@@ -1,0 +1,60 @@
+
+/* ASCENSION HOLOGRAM: original mobile-first full-screen visual system */
+:root{--holo:#62ddff;--holo-violet:#8a6bff;--holo-bg:#020510}
+body{background:radial-gradient(ellipse at 50% -12%,#162b61 0%,transparent 42%),radial-gradient(ellipse at 90% 80%,#191047 0%,transparent 40%),#020510!important;color:#d9eaff!important}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(transparent 97%,rgba(99,154,255,.045) 100%);background-size:100% 28px;z-index:0}
+.app-shell{position:relative;z-index:1;max-width:1050px}
+.topbar{border:0!important;border-bottom:1px solid rgba(98,221,255,.32)!important;background:linear-gradient(90deg,rgba(3,8,24,.96),rgba(14,14,46,.96))!important;box-shadow:0 12px 30px #0008!important;padding:14px!important}
+.brand .eyebrow{font-size:9px;letter-spacing:.3em;color:#7ca7db}
+.brand .title{letter-spacing:.27em;font-size:1.15rem;color:#e9f8ff;text-shadow:0 0 14px #58d7ff7d}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav-btn{font-size:10px!important;letter-spacing:.12em!important;border:1px solid transparent!important;color:#8fa9d2!important;padding:11px 12px!important;transition:background .2s,box-shadow .2s!important}
+.nav-btn.active{background:linear-gradient(180deg,#193773,#0a1b43)!important;color:#a8f4ff!important;border-color:#5bdfff88!important;box-shadow:0 0 18px #27b9ff35,inset 0 0 12px #5c7dff45!important}
+.view.active{animation:holo-reveal .25s ease-out}
+@keyframes holo-reveal{from{opacity:.55;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.panel{background:linear-gradient(135deg,#08132d 0%,#080b21 80%)!important;border:1px solid #31558c99!important;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));box-shadow:inset 0 0 32px #2d50a91b,0 8px 32px #0009!important}
+.panel-inner{padding:20px!important}
+.section-head h2,.section-head h3{text-transform:uppercase;letter-spacing:.17em;font-size:13px;color:#c8eaff}
+.tag{color:#81e9ff!important;background:#0a2450!important;border:1px solid #4188ce!important}
+.action-btn.primary,.hud-main-action{background:linear-gradient(100deg,#173b9d,#4b35c7)!important;border:1px solid #6e9aff!important;color:#f2f7ff!important;box-shadow:0 0 18px #526cff55,inset 0 1px #c7ddff65!important;letter-spacing:.11em;font-weight:700}
+.metric-card,.today-card,.exercise-item,.history-item{background:#081329!important;border:1px solid #27467d!important}
+.field input,.field select,.field textarea,.v2-set input{background:#070f26!important;border:1px solid #365994!important;color:#eff7ff!important}
+.field input:focus,.v2-set input:focus{border-color:#76e9ff!important;box-shadow:0 0 0 2px #2e8bc544!important}
+.shade-dashboard .shade-card{display:grid;grid-template-columns:1.1fr 1fr;min-height:400px;margin:0 0 24px;background:radial-gradient(ellipse at 30% 52%,#172f7b88,transparent 60%),linear-gradient(120deg,#030b22,#0a0828)!important;border:1px solid #5a9deb!important;box-shadow:inset 0 0 70px #1e54b12a,0 0 32px #244ec34d!important}
+.shade-dashboard .shade-art{height:400px}
+.shade-dashboard .shade-svg{filter:drop-shadow(0 0 30px var(--shade-secondary))}
+.shade-dashboard .shade-information{padding:20px 24px 20px 0}
+.shade-dashboard .shade-title{font-size:2.5rem;line-height:1.2;letter-spacing:.18em}
+.shade-dashboard .shade-overline{font-size:.75rem}
+.shade-dashboard .shade-bar{height:9px;box-shadow:0 0 12px var(--shade-secondary)}
+.shade-dashboard .shade-copy{font-size:.95rem}
+#dashboard>.panel.hero{display:none}
+#dashboard>.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#dashboard .grid-2>.panel{margin:0}
+#dashboard .grid-2 .exercise-item{border-left:3px solid #70d7ff}
+#dashboard .grid-2 .day-pill{background:#0b1d3f}
+#dashboard .shade-dashboard::before{content:"COMPANION INTERFACE // LINK ACTIVE";display:block;font-size:10px;letter-spacing:.25em;color:#7adfff;margin:0 0 10px}
+#workout .panel:first-child{border-color:#5b91eb!important}
+#workout .v2-set{background:linear-gradient(90deg,#091b39,#070d25)!important;border:1px solid #3a65a1!important}
+#workout .v2-set.logged{border-left:3px solid #72eaff!important}
+#classes .shade-card{min-height:290px}
+#classes .shade-art{height:290px}
+#metrics .metric-card{border-color:#4064af!important}
+#systemAvatar{border-color:#65caff!important;box-shadow:0 0 25px #327cf388!important}
+@media(max-width:650px){
+ .app-shell{padding:0 10px 95px!important}
+ .topbar{margin:0 -10px 14px!important;border-radius:0!important}
+ .nav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:#030b20f7;border-top:1px solid #3d6ca5;padding:8px 4px max(9px,env(safe-area-inset-bottom))!important;box-shadow:0 -8px 25px #000b}
+ .nav-btn{padding:13px 1px!important;font-size:8px!important;letter-spacing:0!important;min-width:0!important}
+ .shade-dashboard .shade-card{grid-template-columns:1fr;min-height:0}
+ .shade-dashboard .shade-art{height:335px}
+ .shade-dashboard .shade-information{padding:0 18px 24px}
+ .shade-dashboard .shade-title{font-size:1.8rem}
+ #dashboard>.grid-2{grid-template-columns:1fr}
+ .panel-inner{padding:14px!important}
+ #classes .shade-card{grid-template-columns:1fr}
+ #classes .shade-art{height:270px}
+ #classes .shade-information{padding:0 16px 18px}
+ .system-avatar{bottom:80px!important}
+}
+@media(prefers-reduced-motion:reduce){.view.active{animation:none}}
