@@ -128,3 +128,36 @@ input,select,textarea,button{max-width:100%;min-width:0}
 .guild-request{padding:12px;border:1px solid #36598b;display:flex;align-items:center;justify-content:space-between}
 @media(max-width:700px){.nav{grid-template-columns:repeat(7,minmax(0,1fr))!important}.nav-btn{font-size:clamp(6px,1.75vw,9px)!important}.guild-panel{padding:12px}.guild-rank{gap:8px;padding:10px 7px}.guild-place{font-size:17px;min-width:26px}.guild-points{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.shade-art::before,.shade-art::after{animation:none}}
+
+/* Achievement cinematic overlay and camera nutrition interface */
+#ascension-cutscene{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(ellipse at 50% 35%,#172a76,#03050ef7 70%);color:#e7f7ff;padding:18px;overflow-y:auto}
+#ascension-cutscene.visible{display:flex;animation:cutscene-appear .35s ease-out}
+.cutscene-notice{width:min(100%,520px);border:1px solid #70dfff;background:linear-gradient(90deg,#08275e,#100b37);box-shadow:0 0 30px #4289f588;text-align:center;padding:15px;font-size:clamp(11px,3vw,15px);letter-spacing:.15em;font-weight:800;animation:cutscene-drop .45s ease-out}
+.cutscene-notice span{display:block;color:#a9c6ff;font-size:10px;margin-top:6px}
+.cutscene-content{width:min(100%,520px);position:relative;overflow:hidden;border:1px solid #405fb3;border-top:0;background:radial-gradient(ellipse at 50% 25%,#222774bb,transparent 55%),#050a20;padding:12px 20px 24px;text-align:center}
+.cutscene-burst{position:absolute;inset:15px 15%;border-radius:50%;background:conic-gradient(transparent,#8b65ff3d,transparent,#67d9ff55,transparent);filter:blur(18px);animation:ascension-vortex 7s linear infinite}
+.cutscene-art{position:relative;z-index:1;height:clamp(160px,40vh,300px);display:grid;place-items:center;animation:cutscene-rise 1s ease-out}
+.cutscene-art svg{height:100%;width:auto;max-width:100%;filter:drop-shadow(0 0 30px #786dff)}
+.cutscene-eyebrow{position:relative;color:#7fe8ff;font-size:10px;letter-spacing:.25em}
+.cutscene-content h2{position:relative;text-transform:uppercase;font-size:clamp(19px,5vw,30px);letter-spacing:.13em;margin:10px 0;color:white;text-shadow:0 0 24px #727dff}
+.cutscene-content p{position:relative;font-size:12px;color:#bed3f2}
+.cutscene-xp{position:relative;display:flex;flex-direction:column;gap:5px;margin:15px 0;color:#79e6ff}
+.cutscene-xp strong{font-size:27px;text-shadow:0 0 20px #58caff}
+.cutscene-xp span{font-size:10px;letter-spacing:.15em}
+.cutscene-meter{height:8px;border:1px solid #5686ce;background:#07112e;overflow:hidden;margin:12px 0 22px}
+.cutscene-meter span{display:block;height:100%;background:linear-gradient(90deg,#3844bb,#7ee8ff);box-shadow:0 0 16px #8ff5ff;animation:cutscene-charge 2.3s ease-out both}
+#cutscene-close{position:relative;padding:12px 38px;border:1px solid #77dfff;color:#ecfbff;background:#17387b;letter-spacing:.2em;font-weight:700}
+@keyframes cutscene-appear{from{opacity:0}to{opacity:1}}
+@keyframes cutscene-drop{from{transform:translateY(-35px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes cutscene-rise{from{transform:scale(.75);opacity:0;filter:brightness(2)}to{transform:scale(1);opacity:1;filter:brightness(1)}}
+@keyframes cutscene-charge{from{width:0}to{width:100%}}
+.camera-panel{margin:18px 0}
+.camera-trigger{display:inline-block;cursor:pointer;padding:12px 16px;margin:10px 0}
+#ascension-food-camera{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+#ascension-photo-preview img{display:block;width:100%;max-height:310px;object-fit:contain;background:#030716;border:1px solid #4169a8;margin:10px 0}
+.camera-entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.camera-entry label{font-size:11px;letter-spacing:.1em;color:#b4d7ff;min-width:0}
+.camera-entry label:first-child{grid-column:1/-1}
+.camera-entry input{display:block;width:100%;min-width:0;padding:12px;margin-top:6px;background:#07132c;color:white;border:1px solid #3c69a9}
+@media(max-width:400px){.camera-entry{grid-template-columns:minmax(0,1fr)}.camera-entry label:first-child{grid-column:auto}.cutscene-content{padding:8px 12px 20px}}
+@media(prefers-reduced-motion:reduce){#ascension-cutscene,.cutscene-notice,.cutscene-art,.cutscene-burst,.cutscene-meter span{animation:none!important}}
