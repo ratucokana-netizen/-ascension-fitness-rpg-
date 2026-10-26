@@ -4,16 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - 'index.html'
-      - 'app.js'
-      - 'sw.js'
-      - 'manifest.webmanifest'
-      - 'icon-*.png'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'capacitor.config.json'
-      - '.github/workflows/build-apk.yml'
 
 jobs:
   android:
