@@ -33,12 +33,13 @@ jobs:
           node --check ascension-v2.js
           node --check shadow-companion.js
           node --check ascension-guild.js
+          node --check ascension-extras.js
           node -e "const fs=require('fs'); const h=fs.readFileSync('index.html','utf8'); const m=h.match(/<script>([\\s\\S]*?)<\\/script>/); if(!m) process.exit(1); fs.writeFileSync('/tmp/ascension-inline.js',m[1]);"
           node --check /tmp/ascension-inline.js
       - name: Prepare web assets for Capacitor
         run: |
           mkdir -p www
-          cp index.html app.js ascension-v2.js shadow-companion.js ascension-guild.js hologram-ui.css sw.js manifest.webmanifest www/
+          cp index.html app.js ascension-v2.js shadow-companion.js ascension-guild.js ascension-extras.js hologram-ui.css sw.js manifest.webmanifest www/
           cp icon-*.png www/
           node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('capacitor.config.json','utf8')); p.webDir='www'; fs.writeFileSync('capacitor.config.json',JSON.stringify(p,null,2))"
       - name: Generate Android project
