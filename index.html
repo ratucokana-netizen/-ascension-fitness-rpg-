@@ -817,6 +817,7 @@
           <button class="nav-btn" data-tab="metrics" type="button">PROGRESS</button>
           <button class="nav-btn" data-tab="history" type="button">ARCHIVE</button>
           <button class="nav-btn" data-tab="settings" type="button">SYSTEM</button>
+          <button class="nav-btn" data-tab="guild" type="button">GUILD</button>
         </nav>
       </header>
 
@@ -827,6 +828,7 @@
         <section id="metrics" class="view" aria-live="polite"></section>
         <section id="history" class="view" aria-live="polite"></section>
         <section id="settings" class="view" aria-live="polite"></section>
+        <section id="guild" class="view" aria-live="polite"></section>
       </main>
     </div>
 
@@ -852,6 +854,7 @@
     <link rel="stylesheet" href="./hologram-ui.css" />
     <script src="./ascension-v2.js"></script>
     <script src="./shadow-companion.js"></script>
+    <script src="./ascension-guild.js"></script>
     <script>
       'use strict';
 
@@ -1364,6 +1367,7 @@
         else renderClassSelection();
         renderSettings();
         if (window.AscensionShadow) window.AscensionShadow.render();
+        if (tab === "guild" && window.AscensionGuild) window.AscensionGuild.render();
       }
 
       function initialize() {
