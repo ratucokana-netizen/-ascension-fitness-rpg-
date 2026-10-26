@@ -905,6 +905,53 @@
         avatar.dataset.state = speaking ? 'speaking' : 'idle';
       }
 
+      let voiceRequest = 0;
+
+      async function speakSystemMessage(message) {
+        const request = ++voiceRequest;
+        const avatar = document.getElementById('systemAvatar');
+        const caption = document.getElementById('systemCaption');
+        const plainText = message.replace(/[+✓·]/g, '').trim();
+        const nativeTTS = window.Capacitor?.Plugins?.TextToSpeech;
+
+        if (caption) caption.textContent = 'Transmitting';
+        setSystemState(true, true);
+
+        try {
+          if (nativeTTS && window.Capacitor?.isNativePlatform?.()) {
+            await nativeTTS.stop().catch(() => {});
+            if (request !== voiceRequest) return;
+            await nativeTTS.speak({ text: plainText, lang: 'en-US', rate: 0.9, pitch: 0.8, volume: 1, category: 'playback' });
+          } else if ('speechSynthesis' in window) {
+            const synth = window.speechSynthesis;
+            synth.cancel();
+            await new Promise((resolve, reject) => {
+              const utterance = new SpeechSynthesisUtterance(plainText);
+              utterance.lang = 'en-US';
+              utterance.rate = 0.9;
+              utterance.pitch = 0.8;
+              utterance.volume = 1;
+              utterance.onend = resolve;
+              utterance.onerror = (event) => reject(new Error(event.error || 'Speech unavailable'));
+              synth.speak(utterance);
+            });
+          } else {
+            throw new Error('Speech engine unavailable');
+          }
+          if (request === voiceRequest && caption) caption.textContent = 'System online';
+        } catch (error) {
+          console.warn('System voice failed:', error);
+          if (request === voiceRequest) {
+            if (caption) caption.textContent = 'Voice unavailable';
+            const toastMessage = document.getElementById('toastMessage');
+            if (toastMessage) toastMessage.textContent = 'System voice unavailable. Check Android text-to-speech settings.';
+            document.getElementById('toast')?.classList.add('visible');
+          }
+        } finally {
+          if (request === voiceRequest) setSystemState(true, false);
+        }
+      }
+
       function showNotification(message, options = {}) {
         const { voice = true, overlay = false } = options;
         const toast = document.getElementById('toast');
@@ -913,7 +960,7 @@
           toastMessage.textContent = message;
           toast.classList.add('visible');
           clearTimeout(toastTimer);
-          toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
+          toastTimer = setTimeout(() => toast.classList.remove('visible'), 4000);
         }
 
         const overlayEl = document.getElementById('systemOverlay');
@@ -926,31 +973,13 @@
           }
         }
 
-        const avatar = document.getElementById('systemAvatar');
-        const caption = document.getElementById('systemCaption');
-        if (avatar && caption) {
-          caption.textContent = 'System online';
-          setSystemState(true, true);
-          clearTimeout(window.systemResetTimer);
-          window.systemResetTimer = setTimeout(() => setSystemState(true, false), 2200);
-        }
-
-        if (voice && state.settings?.speechEnabled && 'speechSynthesis' in window) {
-          const synth = window.speechSynthesis;
-          synth.cancel();
-          const utterance = new SpeechSynthesisUtterance(message.replace(/[+✓·]/g, ''));
-          utterance.rate = 0.9;
-          utterance.pitch = 0.76;
-          utterance.volume = 0.85;
-          const voices = synth.getVoices();
-          const preferred = voices.find((voiceOption) => /google|samantha|daniel|zira|narrator|alex|victoria/i.test(voiceOption.name) || voiceOption.lang.toLowerCase().startsWith('en')) || voices[0];
-          if (preferred) utterance.voice = preferred;
-          utterance.onend = () => setSystemState(true, false);
-          synth.speak(utterance);
+        setSystemState(true, false);
+        if (voice && state.settings?.speechEnabled) {
+          void speakSystemMessage(message);
         }
       }
 
-      function renderDashboard() {
+            function renderDashboard() {
         const totalXP = xp();
         const progress = totalXP % 500;
         const percent = Math.min(100, Math.round((progress / 500) * 100));
@@ -1180,7 +1209,7 @@
                 </div>
               </div>
               <div class="settings-actions" style="margin-top:20px;">
-                <button id="exportBackup" class="action-btn primary" type="button">Export backup</button>
+                <button id="testVoice" class="action-btn primary" type="button">Test System Voice</button>\n                <button id="exportBackup" class="action-btn primary" type="button">Export backup</button>
                 <label for="importBackup" class="action-btn" style="cursor:pointer;">Import backup</label>
                 <input id="importBackup" type="file" accept="application/json" style="display:none;" />
                 <button id="resetProgress" class="action-btn warn" type="button">Reset progress</button>
@@ -1203,7 +1232,7 @@
           showNotification(state.settings.speechEnabled ? 'System voice enabled' : 'System voice muted', { voice: false, overlay: true });
         });
 
-        document.getElementById('exportBackup').addEventListener('click', () => {
+        document.getElementById('testVoice').addEventListener('click', () => {\n          showNotification('System online. Voice transmission test initiated.', { voice: true, overlay: false });\n        });\n\n        document.getElementById('exportBackup').addEventListener('click', () => {
           const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
