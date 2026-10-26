@@ -761,6 +761,7 @@
         <nav class="nav" aria-label="Main navigation">
           <button class="nav-btn active" data-tab="dashboard" type="button">Dashboard</button>
           <button class="nav-btn" data-tab="workout" type="button">Workout</button>
+          <button class="nav-btn" data-tab="classes" type="button">Classes</button>
           <button class="nav-btn" data-tab="history" type="button">History</button>
           <button class="nav-btn" data-tab="settings" type="button">Settings</button>
         </nav>
@@ -769,6 +770,7 @@
       <main>
         <section id="dashboard" class="view active" aria-live="polite"></section>
         <section id="workout" class="view" aria-live="polite"></section>
+        <section id="classes" class="view" aria-live="polite"></section>
         <section id="history" class="view" aria-live="polite"></section>
         <section id="settings" class="view" aria-live="polite"></section>
       </main>
@@ -1298,6 +1300,37 @@
         });
       }
 
+      const CLASS_PROFILES = {
+        vanguard: { name: 'Vanguard', focus: 'Strength', exercises: ['Barbell Squat', 'Barbell Bench Press', 'Romanian Deadlift', 'Seated Cable Row'] },
+        berserker: { name: 'Berserker', focus: 'Hypertrophy', exercises: ['Incline Dumbbell Press', 'Leg Press', 'Lat Pulldown', 'Dumbbell Lateral Raise'] },
+        shadow: { name: 'Shadow', focus: 'Athleticism', exercises: ['Goblet Squat', 'Dumbbell Step-Up', 'Push-Up', 'Mountain Climbers'] },
+        sentinel: { name: 'Sentinel', focus: 'Endurance', exercises: ['Easy Run', 'Incline Walk', 'Bodyweight Squat', 'Plank'] },
+        warden: { name: 'Warden', focus: 'Hybrid', exercises: ['Barbell Squat', 'Dumbbell Bench Press', 'Seated Cable Row', 'Easy Run'] }
+      };
+
+      function renderClassSelection() {
+        const selectedClass = state.trainingClass || 'warden';
+        document.getElementById('classes').innerHTML = `
+          <div class="panel"><div class="panel-inner">
+            <div class="section-head"><h2>Training class</h2><span class="tag">Ascension 2.0</span></div>
+            <p>Choose your combat identity. Your existing training logs and achievements are preserved.</p>
+            <div class="form-grid">
+              <div class="field"><label for="trainingClass">Class specialization</label>
+                <select id="trainingClass">${Object.entries(CLASS_PROFILES).map(([id, cls]) => `<option value="${id}" ${selectedClass === id ? 'selected' : ''}>${cls.name} — ${cls.focus}</option>`).join('')}</select>
+              </div>
+            </div>
+            <div class="section-head" style="margin-top:20px;"><h2>Class training focus</h2></div>
+            <div class="exercise-list">${CLASS_PROFILES[selectedClass].exercises.map(ex => `<div class="exercise-item"><div class="meta"><strong>${escapeHTML(ex)}</strong><span>Suggested movement · ${CLASS_PROFILES[selectedClass].focus}</span></div></div>`).join('')}</div>
+            <p class="hero-copy">Class-specific programs and progression will be expanded in upcoming releases.</p>
+          </div></div>`;
+        document.getElementById('trainingClass').addEventListener('change', event => {
+          state.trainingClass = event.target.value;
+          save();
+          renderClassSelection();
+          showNotification(`Class selected: ${CLASS_PROFILES[state.trainingClass].name}`, { voice: true });
+        });
+      }
+
       function render() {
         document.querySelectorAll('.nav-btn').forEach((button) => {
           button.classList.toggle('active', button.dataset.tab === tab);
@@ -1309,6 +1342,7 @@
         renderDashboard();
         renderWorkout();
         renderHistory();
+        renderClassSelection();
         renderSettings();
       }
 
