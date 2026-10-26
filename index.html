@@ -762,6 +762,7 @@
           <button class="nav-btn active" data-tab="dashboard" type="button">Dashboard</button>
           <button class="nav-btn" data-tab="workout" type="button">Workout</button>
           <button class="nav-btn" data-tab="classes" type="button">Classes</button>
+          <button class="nav-btn" data-tab="metrics" type="button">Metrics</button>
           <button class="nav-btn" data-tab="history" type="button">History</button>
           <button class="nav-btn" data-tab="settings" type="button">Settings</button>
         </nav>
@@ -771,6 +772,7 @@
         <section id="dashboard" class="view active" aria-live="polite"></section>
         <section id="workout" class="view" aria-live="polite"></section>
         <section id="classes" class="view" aria-live="polite"></section>
+        <section id="metrics" class="view" aria-live="polite"></section>
         <section id="history" class="view" aria-live="polite"></section>
         <section id="settings" class="view" aria-live="polite"></section>
       </main>
@@ -795,6 +797,7 @@
       </div>
     </div>
 
+    <script src="./ascension-v2.js"></script>
     <script>
       'use strict';
 
@@ -989,7 +992,7 @@
       }
 
             function renderDashboard() {
-        const totalXP = xp();
+        const totalXP = xp() + (state.v2?.sessions || []).reduce((total, session) => total + Math.min(300, 100 + (session.exercises || []).reduce((n, ex) => n + (ex.sets || []).filter(set => set.done && !set.warmup).length * 15, 0)), 0);
         const progress = totalXP % 500;
         const percent = Math.min(100, Math.round((progress / 500) * 100));
         const workout = workoutFor(selected);
@@ -1130,6 +1133,7 @@
             }).join('');
 
         document.getElementById('workout').innerHTML = `
+          <div id="training-v2"></div>
           <div class="panel">
             <div class="panel-inner">
               <div class="section-head">
@@ -1183,6 +1187,7 @@
           : '<div class="history-item"><div><strong>No combat logs yet</strong><span>Complete an objective to begin your archive.</span></div></div>';
 
         document.getElementById('history').innerHTML = `
+          <div id="v2history"></div>
           <div class="panel">
             <div class="panel-inner">
               <div class="section-head">
@@ -1342,7 +1347,8 @@
         renderDashboard();
         renderWorkout();
         renderHistory();
-        renderClassSelection();
+        if (window.AscensionV2) window.AscensionV2.render();
+        else renderClassSelection();
         renderSettings();
       }
 
@@ -1370,6 +1376,7 @@
         setSystemState(true, false);
         showNotification('System initialized. Training protocols online.', { voice: true, overlay: true });
         render();
+        if (window.AscensionV2) window.AscensionV2.init();
       }
 
       if ('serviceWorker' in navigator) {
