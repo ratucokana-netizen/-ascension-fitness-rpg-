@@ -1209,7 +1209,8 @@
                 </div>
               </div>
               <div class="settings-actions" style="margin-top:20px;">
-                <button id="testVoice" class="action-btn primary" type="button">Test System Voice</button>\n                <button id="exportBackup" class="action-btn primary" type="button">Export backup</button>
+                <button id="testVoice" class="action-btn primary" type="button">Test System Voice</button>
+                <button id="exportBackup" class="action-btn primary" type="button">Export backup</button>
                 <label for="importBackup" class="action-btn" style="cursor:pointer;">Import backup</label>
                 <input id="importBackup" type="file" accept="application/json" style="display:none;" />
                 <button id="resetProgress" class="action-btn warn" type="button">Reset progress</button>
@@ -1232,7 +1233,11 @@
           showNotification(state.settings.speechEnabled ? 'System voice enabled' : 'System voice muted', { voice: false, overlay: true });
         });
 
-        document.getElementById('testVoice').addEventListener('click', () => {\n          showNotification('System online. Voice transmission test initiated.', { voice: true, overlay: false });\n        });\n\n        document.getElementById('exportBackup').addEventListener('click', () => {
+        document.getElementById('testVoice').addEventListener('click', () => {
+          showNotification('System online. Voice transmission test initiated.', { voice: true, overlay: false });
+        });
+
+        document.getElementById('exportBackup').addEventListener('click', () => {
           const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
