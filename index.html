@@ -855,6 +855,7 @@
     <script src="./ascension-v2.js"></script>
     <script src="./shadow-companion.js"></script>
     <script src="./ascension-guild.js"></script>
+    <script src="./ascension-extras.js"></script>
     <script>
       'use strict';
 
@@ -1368,6 +1369,7 @@
         renderSettings();
         if (window.AscensionShadow) window.AscensionShadow.render();
         if (tab === "guild" && window.AscensionGuild) window.AscensionGuild.render();
+        if (window.AscensionExtras) window.AscensionExtras.render();
       }
 
       function initialize() {
