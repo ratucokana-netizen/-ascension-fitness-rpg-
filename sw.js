@@ -1,4 +1,4 @@
-const CACHE='ascension-v3-native-voice';
+const CACHE='ascension-v4-classes-voice';
 const FILES=['./','./index.html','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('ascension-')&&key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()])));
