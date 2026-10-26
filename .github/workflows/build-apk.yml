@@ -37,7 +37,7 @@ jobs:
       - name: Prepare web assets for Capacitor
         run: |
           mkdir -p www
-          cp index.html app.js ascension-v2.js shadow-companion.js sw.js manifest.webmanifest www/
+          cp index.html app.js ascension-v2.js shadow-companion.js hologram-ui.css sw.js manifest.webmanifest www/
           cp icon-*.png www/
           node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('capacitor.config.json','utf8')); p.webDir='www'; fs.writeFileSync('capacitor.config.json',JSON.stringify(p,null,2))"
       - name: Generate Android project
