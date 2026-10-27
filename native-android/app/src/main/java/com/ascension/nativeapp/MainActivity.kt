@@ -1,6 +1,7 @@
 package com.ascension.nativeapp
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.speech.tts.TextToSpeech
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -88,6 +89,12 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
     val plan = workouts[day].orEmpty()
     val quest = days[day] ?: "RECOVERY"
     val done = plan.count { data["done:$today:${it.name}"]=="true" }
+    var clockTick by remember { mutableLongStateOf(SystemClock.elapsedRealtime()) }
+    LaunchedEffect(Unit) { while(true) { delay(1000);clockTick=SystemClock.elapsedRealtime() } }
+    val startedAt = data["session:start"]?.toLongOrNull()
+    val elapsed = if(startedAt!=null) ((clockTick-startedAt)/1000).coerceAtLeast(0) else 0L
+    val restUntil = data["rest:until"]?.toLongOrNull() ?: 0L
+    val restSeconds = ((restUntil-clockTick+999)/1000).coerceAtLeast(0)
     val totalXp = data["xp"]?.toIntOrNull() ?: 0
     val level = 1 + totalXp / 500
     val rank = when { level>=40->"S";level>=25->"A";level>=15->"B";level>=8->"C";level>=4->"D";else->"E" }
@@ -168,6 +175,28 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                             } }
                         }
                         "TRAIN" -> {
+                            item { Panel("SESSION CONTROL") {
+                                Text(if(startedAt==null) "READY TO BEGIN" else "SESSION ACTIVE  •  %02d:%02d:%02d".format(elapsed/3600,(elapsed/60)%60,elapsed%60),color=cyan,fontWeight=FontWeight.Black,fontSize=17.sp)
+                                if(startedAt==null) {
+                                    Button(onClick={save("session:start",SystemClock.elapsedRealtime().toString());speak("Training session initiated. Begin your protocol.")}) { Text("▶ BEGIN SESSION") }
+                                } else {
+                                    Text("$done / ${plan.size} OBJECTIVES CLEARED",color=muted)
+                                    Button(onClick={
+                                        val minutes=(elapsed/60).coerceAtLeast(1)
+                                        save("duration:$today",elapsed.toString())
+                                        save("session:start","")
+                                        save("rest:until","0")
+                                        speak("Training session complete. Duration $minutes minutes. Progress recorded.")
+                                    }) { Text("■ END & SAVE SESSION") }
+                                }
+                                if(restSeconds>0) Text("REST TIMER  •  ${restSeconds}s REMAINING",color=cyan,fontWeight=FontWeight.Bold)
+                                Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                                    listOf(60L,90L,120L).forEach { seconds ->
+                                        OutlinedButton(onClick={save("rest:until",(SystemClock.elapsedRealtime()+seconds*1000).toString())}) { Text("${seconds}s REST") }
+                                    }
+                                }
+                                if((data["duration:$today"]?.toLongOrNull() ?: 0L)>0L) Text("LAST SESSION: ${(data["duration:$today"]!!.toLong()/60)} MINUTES",color=muted)
+                            } }
                             item { Panel("TRAINING PROTOCOL / $quest") {
                                 Text("3 sets • 8–12 reps • increase load every 2 weeks when all sets reach 12 clean reps.",color=muted)
                                 if(plan.isEmpty()) Text("Recovery day. Mobility and walking recommended.",color=white)
@@ -186,7 +215,16 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                                     }
                                     Button(enabled=!complete,onClick={
                                         val valid=(1..3).all { (data["reps:$today:${move.name}:$it"]?.toIntOrNull() ?: 0)>0 }
-                                        if(valid) { save(key,"true");save("xp",((data["xp"]?.toIntOrNull() ?: 0)+20).toString());speak("Objective complete. Twenty experience points awarded.") }
+                                        if(valid) {
+                                            save(key,"true")
+                                            save("xp",((data["xp"]?.toIntOrNull() ?: 0)+20).toString())
+                                            val load=weight.toDoubleOrNull() ?: 0.0
+                                            val volume=(1..3).sumOf { (data["reps:$today:${move.name}:$it"]?.toIntOrNull() ?: 0)*load }
+                                            save("volume:$today:${move.name}",volume.toString())
+                                            val previous=data["best:${move.name}"]?.toDoubleOrNull() ?: 0.0
+                                            if(volume>previous) { save("best:${move.name}",volume.toString());speak("New personal record. Objective complete. Twenty experience points awarded.") }
+                                            else speak("Objective complete. Twenty experience points awarded.")
+                                        }
                                     }) { Text(if(complete)"✓ COMPLETE (+20 XP)" else "COMPLETE EXERCISE") }
                                 }
                             }
@@ -197,6 +235,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                                 Text("$done / ${plan.size} objectives",color=cyan)
                                 LinearProgressIndicator(progress={if(plan.isEmpty())0f else done.toFloat()/plan.size},modifier=Modifier.fillMaxWidth())
                                 Text("Exercise rewards are awarded only once per day.",color=muted)
+                                Text("TRAINING VOLUME: ${plan.sumOf { data["volume:$today:${it.name}"]?.toDoubleOrNull() ?: 0.0 }.toInt()} KG",color=cyan)
                             } }
                             item { Panel("ACHIEVEMENTS") {
                                 Text(if(totalXp>=100)"✓ FIRST 100 XP" else "LOCKED • FIRST 100 XP",color=white)
