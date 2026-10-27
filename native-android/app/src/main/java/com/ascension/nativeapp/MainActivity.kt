@@ -47,6 +47,14 @@ private val workouts = mapOf(
     5 to listOf(Move("Incline Bench Press","Chest"),Move("Chest Supported Row","Back"),Move("Dumbbell Shoulder Press","Shoulders"),Move("Cable Curl","Biceps"),Move("Triceps Extension","Triceps")),
     6 to listOf(Move("Easy Run 30 minutes","Cardio"))
 )
+private val classSwaps = mapOf(
+    "Berserker" to mapOf("Bench Press" to "Dumbbell Bench Press","Barbell Squat" to "Hack Squat","Seated Cable Row" to "Chest Supported Row"),
+    "Shadow" to mapOf("Bench Press" to "Push-Up","Barbell Squat" to "Goblet Squat","Lat Pulldown" to "Assisted Pull-Up","Leg Press" to "Walking Lunge"),
+    "Sentinel" to mapOf("Bench Press" to "Push-Up","Barbell Squat" to "Bodyweight Squat","Romanian Deadlift" to "Kettlebell Deadlift","Shoulder Press" to "Arnold Press"),
+    "Warden" to mapOf("Bench Press" to "Dumbbell Bench Press","Barbell Squat" to "Front Squat","Lat Pulldown" to "Pull-Up")
+)
+private fun specializedPlan(day:Int,hunterClass:String):List<Move> =
+    workouts[day].orEmpty().map { move -> move.copy(name=classSwaps[hunterClass]?.get(move.name) ?: move.name) }
 private val days = mapOf(1 to "PUSH",3 to "PULL",4 to "LEGS",5 to "UPPER",6 to "RUN")
 private val classes = listOf("Vanguard","Berserker","Shadow","Sentinel","Warden")
 
@@ -86,7 +94,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
     var tab by remember { mutableStateOf("SYSTEM") }
     val today = remember { LocalDate.now().toString() }
     val day = remember { LocalDate.now().dayOfWeek.value }
-    val plan = workouts[day].orEmpty()
+    val hunterClass = data["class"] ?: "Vanguard"\n    val plan = specializedPlan(day,hunterClass)
     val quest = days[day] ?: "RECOVERY"
     val done = plan.count { data["done:$today:${it.name}"]=="true" }
     var clockTick by remember { mutableLongStateOf(SystemClock.elapsedRealtime()) }
@@ -198,7 +206,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                                 if((data["duration:$today"]?.toLongOrNull() ?: 0L)>0L) Text("LAST SESSION: ${(data["duration:$today"]!!.toLong()/60)} MINUTES",color=muted)
                             } }
                             item { Panel("TRAINING PROTOCOL / $quest") {
-                                Text("3 sets • 8–12 reps • increase load every 2 weeks when all sets reach 12 clean reps.",color=muted)
+                                Text("CLASS: $hunterClass • 3 sets • 8–12 reps. Increase load after two weeks when all sets reach 12 clean reps.",color=muted)
                                 if(plan.isEmpty()) Text("Recovery day. Mobility and walking recommended.",color=white)
                             } }
                             items(plan) { move ->
@@ -254,7 +262,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                         }
                         "CLASS" -> {
                             item { Panel("HUNTER CLASS") {
-                                Text("Select your specialization. Class selection is saved locally.",color=muted)
+                                Text("Your class changes exercise selection on training days. Switching classes keeps existing workout records.",color=muted)
                                 classes.forEach { hunterClass ->
                                     val selected=(data["class"] ?: "Vanguard")==hunterClass
                                     OutlinedButton(onClick={save("class",hunterClass);speak("$hunterClass class selected.")},modifier=Modifier.fillMaxWidth()) {
