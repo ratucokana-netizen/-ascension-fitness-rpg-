@@ -9,6 +9,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.draw.clip
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,12 +32,12 @@ import org.json.JSONObject
 import java.time.LocalDate
 import java.util.Locale
 
-private val bg = Color(0xFF030714)
-private val panel = Color(0xFF101A30)
-private val cyan = Color(0xFF78DFFF)
-private val violet = Color(0xFF9A7CFF)
+private val bg = Color(0xFF05040D)
+private val panel = Color(0xFF121024)
+private val cyan = Color(0xFFBBA5FF)
+private val violet = Color(0xFF7445EA)
 private val white = Color(0xFFEAF4FF)
-private val muted = Color(0xFF9BAFCE)
+private val muted = Color(0xFF9A94B5)
 private data class Move(val name:String, val muscle:String)
 private val workouts = mapOf(
     1 to listOf(Move("Bench Press","Chest"),Move("Incline Dumbbell Press","Chest"),Move("Shoulder Press","Shoulders"),Move("Lateral Raise","Shoulders"),Move("Triceps Pushdown","Triceps")),
@@ -83,37 +91,66 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
     val totalXp = data["xp"]?.toIntOrNull() ?: 0
     val level = 1 + totalXp / 500
     val rank = when { level>=40->"S";level>=25->"A";level>=15->"B";level>=8->"C";level>=4->"D";else->"E" }
+    val transition = rememberInfiniteTransition(label="systemPulse")
+    val pulse by transition.animateFloat(initialValue=0.35f,targetValue=0.95f,animationSpec=infiniteRepeatable(tween(1450),RepeatMode.Reverse),label="pulse")
     LaunchedEffect(Unit) {
-        repeat(8) { boot=it;delay(if(it in 3..5) 130L else 300L) }
-        boot=8
-        speak("System online. Welcome back, Hunter. Rank $rank. Today's protocol: $quest. $done of ${plan.size} objectives completed.")
+        repeat(12) { boot=it;delay(if(it in 4..7) 95L else 210L) }
+        boot=12
+        speak("System initialized. Welcome back, Hunter. Rank $rank. Level $level. Today's protocol: $quest. $done of ${plan.size} objectives completed.")
     }
     MaterialTheme(colorScheme=darkColorScheme(primary=cyan,background=bg,surface=panel,onSurface=white)) {
-        Column(Modifier.fillMaxSize().background(bg).padding(horizontal=16.dp)) {
-            Spacer(Modifier.height(22.dp))
-            Text("A S C E N S I O N",color=cyan,fontSize=23.sp,fontWeight=FontWeight.Black)
-            Text("S Y S T E M   2 . 0  /  N A T I V E",color=muted,fontSize=10.sp)
-            Spacer(Modifier.height(16.dp))
-            if(boot<8) {
-                Spacer(Modifier.height(75.dp))
-                Text(if(boot in 3..5) "S̷Y̷S̷T̷E̷M̷  I̷N̷T̷E̷R̷F̷E̷R̷E̷N̷C̷E̷" else listOf("INITIALIZING","AUTHENTICATING","LOADING PROFILE","SIGNAL ERROR","RECALIBRATING","SIGNAL RESTORED","SYNCING","SYSTEM ONLINE")[boot],color=if(boot in 3..5) Color(0xFFFF66AD) else cyan,fontSize=20.sp)
-                Spacer(Modifier.height(16.dp))
-                LinearProgressIndicator(progress={boot/8f},modifier=Modifier.fillMaxWidth())
-                if(boot in 3..5) repeat(12) { HorizontalDivider(color=if(it%2==0)violet else cyan,thickness=(it%3+1).dp) }
-            } else {
-                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-                    Text("HUNTER  /  RANK $rank",color=white,fontWeight=FontWeight.Bold)
-                    Text("LVL $level  •  $totalXp XP",color=cyan)
-                }
-                Spacer(Modifier.height(8.dp))
-                LinearProgressIndicator(progress={(totalXp%500)/500f},modifier=Modifier.fillMaxWidth())
-                Spacer(Modifier.height(14.dp))
-                Row(Modifier.horizontalScroll(rememberScrollState()),horizontalArrangement=Arrangement.spacedBy(6.dp)) {
-                    listOf("SYSTEM","TRAIN","QUESTS","METRICS","CLASS").forEach { item ->
-                        Button(onClick={tab=item},colors=ButtonDefaults.buttonColors(containerColor=if(tab==item)violet else panel),contentPadding=PaddingValues(horizontal=12.dp,vertical=4.dp)) { Text(item,fontSize=11.sp,color=white) }
+        Column(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(bg,Color(0xFF110B27),bg))).padding(horizontal=16.dp)) {
+            if(boot<12) {
+                Box(Modifier.fillMaxSize(),contentAlignment=Alignment.Center) {
+                    Column(horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(24.dp)) {
+                        SystemSigil(pulse)
+                        Text(if(boot in 4..7) "S Y S T E M   I N T E R F E R E N C E" else "S Y S T E M   A W A K E N I N G",color=if(boot in 4..7) Color(0xFFFF4B8B) else cyan,fontSize=13.sp,fontWeight=FontWeight.Black,letterSpacing=2.sp,textAlign=TextAlign.Center)
+                        Text(listOf("ESTABLISHING LINK","IDENTITY CONFIRMED","READING HUNTER PROFILE","SCANNING ATTRIBUTES","SIGNAL DISRUPTION","RECONNECTING","SIGNAL DISRUPTION","OVERRIDING","RESTORING INTERFACE","CALIBRATING QUEST ENGINE","SYNCING PROGRESSION","SYSTEM ONLINE")[boot],color=white,fontSize=11.sp,letterSpacing=1.sp)
+                        LinearProgressIndicator(progress={boot/12f},modifier=Modifier.fillMaxWidth(.75f),color=violet,trackColor=panel)
+                        if(boot in 4..7) repeat(5) { HorizontalDivider(color=if(it%2==0)violet else Color(0xFFFF4B8B),thickness=(it%3+1).dp) }
                     }
                 }
-                Spacer(Modifier.height(14.dp))
+            } else {
+                Spacer(Modifier.height(22.dp))
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+                    Column {
+                        Text("A S C E N S I O N",color=white,fontSize=23.sp,fontWeight=FontWeight.Black,letterSpacing=2.sp)
+                        Text("THE SYSTEM  /  HUNTER INTERFACE",color=muted,fontSize=9.sp,letterSpacing=1.sp)
+                    }
+                    Box(Modifier.size(42.dp).border(1.dp,violet,CircleShape).background(panel,CircleShape),contentAlignment=Alignment.Center) {
+                        Text(rank,color=cyan,fontSize=21.sp,fontWeight=FontWeight.Black)
+                    }
+                }
+                Spacer(Modifier.height(20.dp))
+                Panel("HUNTER STATUS") {
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(18.dp)) {
+                        SystemSigil(pulse,92)
+                        Column(Modifier.weight(1f)) {
+                            Text("RANK $rank  /  ${data["class"] ?: "Vanguard"}".uppercase(),color=cyan,fontSize=11.sp,fontWeight=FontWeight.Bold,letterSpacing=1.sp)
+                            Text("LEVEL $level",color=white,fontSize=30.sp,fontWeight=FontWeight.Black)
+                            Text("$totalXp XP  •  ${500-totalXp%500} TO NEXT LEVEL",color=muted,fontSize=10.sp)
+                            LinearProgressIndicator(progress={(totalXp%500)/500f},modifier=Modifier.fillMaxWidth().padding(top=9.dp),color=violet,trackColor=Color(0xFF302647))
+                        }
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                    listOf("QUEST" to quest,"CLEARED" to "$done/${plan.size}","STREAK" to "${data["streak"] ?: "0"}D").forEach { (label,value) ->
+                        Column(Modifier.weight(1f).background(panel,RoundedCornerShape(8.dp)).border(1.dp,violet.copy(alpha=.3f),RoundedCornerShape(8.dp)).padding(10.dp),horizontalAlignment=Alignment.CenterHorizontally) {
+                            Text(value,color=white,fontSize=14.sp,fontWeight=FontWeight.Black,maxLines=1)
+                            Text(label,color=muted,fontSize=9.sp)
+                        }
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+                Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),horizontalArrangement=Arrangement.spacedBy(6.dp)) {
+                    listOf("SYSTEM","TRAIN","QUESTS","METRICS","CLASS").forEach { item ->
+                        OutlinedButton(onClick={tab=item},border=BorderStroke(1.dp,if(tab==item)cyan else violet.copy(alpha=.35f)),colors=ButtonDefaults.outlinedButtonColors(containerColor=if(tab==item)violet.copy(alpha=.45f) else panel),contentPadding=PaddingValues(horizontal=12.dp,vertical=2.dp)) {
+                            Text(item,fontSize=10.sp,color=if(tab==item)white else muted,fontWeight=FontWeight.Bold)
+                        }
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
                 LazyColumn(verticalArrangement=Arrangement.spacedBy(12.dp),contentPadding=PaddingValues(bottom=45.dp)) {
                     when(tab) {
                         "SYSTEM" -> {
@@ -122,7 +159,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
                                 Text("$done / ${plan.size} exercises completed",color=white)
                                 Text("CLASS: ${data["class"] ?: "Vanguard"}",color=muted)
                                 Spacer(Modifier.height(8.dp))
-                                Button(onClick={speak("Hunter. Your current rank is $rank. Today's objective is $quest. Complete your training to earn experience.")}) { Text("▶ SYSTEM BRIEFING") }
+                                Button(onClick={speak("Hunter. Your current rank is $rank. Today's objective is $quest. Complete your training to earn experience.")}) { Text("◈  INITIATE SYSTEM BRIEFING") }
                             } }
                             item { Panel("PROGRESSION") {
                                 Text("XP: $totalXp  •  LEVEL: $level  •  RANK: $rank",color=white)
@@ -196,7 +233,7 @@ private fun SystemScreen(data:Map<String,String>,save:(String,String)->Unit,spea
 
 @Composable
 private fun Panel(title:String,content:@Composable ColumnScope.()->Unit) {
-    Column(Modifier.fillMaxWidth().border(1.dp,cyan.copy(alpha=.45f),RoundedCornerShape(12.dp)).background(panel,RoundedCornerShape(12.dp)).padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+    Column(Modifier.fillMaxWidth().border(1.dp,violet.copy(alpha=.52f),RoundedCornerShape(10.dp)).background(Brush.verticalGradient(listOf(Color(0xFF1C1535),panel)),RoundedCornerShape(10.dp)).padding(16.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
         Text(title,color=cyan,fontWeight=FontWeight.Bold,fontSize=15.sp)
         content()
     }
@@ -205,4 +242,23 @@ private fun Panel(title:String,content:@Composable ColumnScope.()->Unit) {
 private fun MetricField(label:String,key:String,data:Map<String,String>,save:(String,String)->Unit) {
     var value by remember(key) { mutableStateOf(data[key] ?: "") }
     OutlinedTextField(value=value,onValueChange={value=it;save(key,it)},label={Text(label)},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Decimal),modifier=Modifier.fillMaxWidth())
+}
+
+@Composable
+private fun SystemSigil(pulse:Float,size:Int=190) {
+    Box(Modifier.size(size.dp),contentAlignment=Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val center=Offset(this.size.width/2,this.size.height/2)
+            val radius=this.size.minDimension*.39f
+            drawCircle(violet.copy(alpha=pulse*.75f),radius,center,style=Stroke(width=2.5f))
+            drawCircle(cyan.copy(alpha=.55f),radius*.76f,center,style=Stroke(width=1.5f))
+            for(i in 0..7) {
+                val angle=Math.PI*i/4
+                val x=center.x+kotlin.math.cos(angle).toFloat()*radius
+                val y=center.y+kotlin.math.sin(angle).toFloat()*radius
+                drawLine(cyan.copy(alpha=pulse),center,Offset(x,y),strokeWidth=1.4f)
+            }
+        }
+        Text("◇",fontSize=(size*.31f).sp,color=cyan.copy(alpha=pulse),fontWeight=FontWeight.Black)
+    }
 }
